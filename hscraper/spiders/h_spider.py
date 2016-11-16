@@ -1,7 +1,7 @@
 import scrapy
 
-class HeroldCrawler(scrapy.Spider):
-	name = 'herold'
+class HCrawler(scrapy.Spider):
+	name = 'hcrawler'
 	start_urls = []
 
 	def test(self, response):
@@ -23,11 +23,6 @@ class HeroldCrawler(scrapy.Spider):
 		next_page = response.css('li.next > a ::attr(href)').extract_first()
 		if next_page:
 			yield scrapy.Request(response.urljoin(next_page), callback=self.parse)
-
-# class HeroldDetailCrawler(scrapy.Spider):
-# 	name = 'herolddetail'
-# 	start_urls = ['https://www.herold.at/gelbe-seiten/graz/p9DRX/%C3%A9tienn%C3%ADe-%E2%80%A2-werkstatt-f%C3%BCr-idee-design/']
-# 	def parse(self, response):
 
 	def parseDetails(self, response):
 		self.logger.info('parseItem %s', response.url)
